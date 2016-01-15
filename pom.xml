@@ -26,7 +26,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <shiro.version>1.2.2</shiro.version>
+        <shiro.version>1.2.4</shiro.version>
     </properties>
 
     <build>
@@ -39,6 +39,25 @@
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>
+                </configuration>
+            </plugin>
+
+            <!-- This plugin is only to test run our little application.  It is not
+                 needed in most Shiro-enabled applications: -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>java</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <classpathScope>test</classpathScope>
+                    <mainClass>Tutorial</mainClass>
                 </configuration>
             </plugin>
         </plugins>
@@ -57,6 +76,14 @@
             <artifactId>jcl-over-slf4j</artifactId>
             <version>1.7.5</version>
             <scope>runtime</scope>
+        </dependency>
+        <!-- Shiro uses SLF4J for logging.  We'll use the 'simple' binding
+             in this example app.  See http://www.slf4j.org for more info. -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.6.1</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -89,6 +116,11 @@
             <version>0.9.1</version>
             <scope>runtime</scope>
         </dependency>
+        <!--<dependency>
+            <groupId>com.stormpath.sdk</groupId>
+            <artifactId>stormpath-servlet-plugin</artifactId>
+            <version>1.0.RC8</version>
+        </dependency>-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
